@@ -1,255 +1,314 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Smart Traffic Management System</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Custom Styles -->
-    <link href="style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    main {
+        min-height: calc(100vh - 80px); 
+        padding-bottom: 20px; 
+    }
+        
         .hero-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero-section video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .nav-link:hover {
+            color: #f7f6f5;
+        }
+        .nav-link.active {
+            color: #f7f6f5;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .team-member {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .team-member img, .team-member h2, .team-member p {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .team-member:hover img {
+            transform: scale(1.1);
+        }
+        .team-member:hover h2, .team-member:hover p {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+        .team-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .team-member:hover .team-info {
+            opacity: 1;
+        }
+        .highlight {
+            background-color: #f7f6f5;
+            color: #1a202c;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+        .section {
+            background: linear-gradient(135deg, #f7f6f5 25%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            color: #2d3748;
+        }
+        .section p {
+            color: #4a5568;
+            text-align: justify;
         }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-traffic-light me-2"></i>Smart Traffic Management
+    <nav class="bg-blue-800 p-4 fixed w-full z-10 top-0">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold flex items-center" href="#">
+                <i class="fas fa-traffic-light mr-2"></i>
+                Smart Traffic Management
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="text-white block lg:hidden" id="nav-toggle">
+                <i class="fas fa-bars"></i>
             </button>
-            <div class=" navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+            <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="nav-content">
+                <ul class="lg:flex lg:justify-between text-white text-lg">
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#home">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Motivation</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#motivation">Motivation</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Goal</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#goal">Goal</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Outcome</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#outcome">Outcome</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/team">Team</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#team">Team</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Goto Project</a>
+                    <li class="lg:mx-4 my-2 lg:my-0">
+                        <a class="hover:text-gray-300 nav-link" href="#project">Goto Project</a>
                     </li>
                 </ul>
-                <!-- <div class="navbar-nav">
-                    <a href="#" class="btn btn-outline-light me-2">Login</a>
-                    <a href="#" class="btn btn-light">Register</a>
-                </div> -->
             </div>
         </div>
     </nav>
-
     <!-- Main Content -->
-    <main class="container-fluid py-4">
-        <div class="row " >
-            <div class="col-12 text-center hero-section">
-                <h1 class="display-4 mx-auto p-8">Smart Traffic Management and Violation Detection System</h1>
-                <p class="lead">Intelligent Monitoring | Real-time Violation Detection</p>
-            </div>
+    <main class="container mx-auto py-4">
+        <div class="hero-section text-center" id="home">
+            <video autoplay loop muted>
+                <source src="static\Img\trafficnight.mp4" type="video/mp4"/>
+                Your browser does not support the video tag.
+            </video>
+            <h1 class="text-4xl lg:text-6xl font-bold mb-4 animate__animated animate__fadeInUp">
+                SMART TRAFFIC CONTROL AND VIOLATION DETECTION SYSTEM
+            </h1>
+            <p class="text-xl lg:text-2xl animate__animated animate__fadeInUp">
+                Intelligent Monitoring | Real-time Violation Detection
+            </p>
         </div>
-
         <!-- About -->
-        <div class="row scope-section mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">About</h2>
-                        <p class="card-text text-center">
-                            The scope of "Smart Traffic Control and Violation Detection System" is to develop an intelligent system that addresses challenges related to urban traffic congestion, road safety and prioritizes emergency vehicles for quicker response times. The system leverages advanced technologies to analyze real-time traffic conditions, optimize traffic flow, and enhance compliance with traffic regulations. It includes dynamic signal control to reduce delays and improve efficiency at intersections, along with automated violation detection to identify non-compliance such as red-light breaches and helmet violations. The objective is to create a scalable, cost-effective, and environmentally friendly solution that enhances urban mobility, supports law enforcement efforts, and promotes safer road usage. By integrating real-time traffic density monitoring and automated signal adjustments, the project aims to deliver a robust platform for modern traffic management in growing cities.
-                        </p>
-                    </div>
-                </div>
+        <div class="mt-12" id="about">
+            <div class="section">
+                <h2 class="text-3xl font-bold text-center mb-4">ABOUT</h2>
+                <p>
+                    The "Smart Traffic Control and Violation Detection System" addresses traffic congestion in metro cities, particularly in developing nations, where infrastructure expansion is limited by space, cost, and environmental concerns. The system optimizes existing road usage by analyzing real-time traffic patterns, predicting congestion, and dynamically adjusting signals to improve urban mobility. Utilizing technologies like the YOLOv8 object detection model, it detects and tracks vehicles, identifies violations such as helmet non-compliance, and supports enforcement efforts. By integrating adaptive algorithms, it effectively reduces delays and vehicle stops, making urban traffic flow more efficient and safer.
+                </p>
             </div>
         </div>
         <!-- Motivation -->
-        <div class="row scope-section mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Motivation</h2>
-                        <p class="card-text text-center">
-                            The scope of "Smart Traffic Control and Violation Detection System" is to develop an intelligent system that addresses challenges related to urban traffic congestion, road safety and prioritizes emergency vehicles for quicker response times. The system leverages advanced technologies to analyze real-time traffic conditions, optimize traffic flow, and enhance compliance with traffic regulations. It includes dynamic signal control to reduce delays and improve efficiency at intersections, along with automated violation detection to identify non-compliance such as red-light breaches and helmet violations. The objective is to create a scalable, cost-effective, and environmentally friendly solution that enhances urban mobility, supports law enforcement efforts, and promotes safer road usage. By integrating real-time traffic density monitoring and automated signal adjustments, the project aims to deliver a robust platform for modern traffic management in growing cities.
-                        </p>
-                    </div>
-                </div>
+        <div class="mt-12" id="motivation">
+            <div class="section">
+                <h2 class="text-3xl font-bold text-center mb-4">MOTIVATION</h2>
+                <p>
+                    The motivation for the "Smart Traffic Control and Violation Detection System" stems from the challenges of urban traffic management, including rising congestion, frequent violations, and the impracticality of infrastructure expansion due to space and cost constraints. By leveraging advanced technologies like real-time monitoring and predictive analytics, the project aims to optimize traffic flow, reduce delays, and enhance road safety. This system supports the vision of smarter, more sustainable cities by improving urban mobility and strengthening law enforcement.
+                </p>
             </div>
         </div>
-
-        <!-- Team Guide -->
-        <div class="row scope-section mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Team Guide</h2>
-                        <div class="text-center mb-12">
-                            <img alt="A person with a friendly smile, wearing a suit and tie" class="w-64 h-64 object-cover rounded-circle mx-auto mb-4" height="300" src="https://storage.googleapis.com/a1aa/image/4pzIofEkXMRvOSHgDUNwPwUGFSPOKMY39BUEL360euTXTH1TA.jpg" width="300"/>
-                            <h2 class="text-xl font-semibold">
-                                John Doe
-                            </h2>
-                            <p class="text-gray-500">
-                                Lead Guide
-                            </p>
-                            <p class="text-gray-700 mt-2">
-                                John has over 20 years of experience in guiding teams to success.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Goal -->
+        <div class="mt-12" id="goal">
+            <div class="section">
+                <h2 class="text-3xl font-bold text-center mb-4">GOAL</h2>
+                <p>
+                    The goal of the "Smart Traffic Control and Violation Detection System" is to create a scalable, cost-effective, and environmentally friendly solution that enhances urban mobility, supports law enforcement efforts, and promotes safer road usage. By integrating real-time traffic density monitoring and automated signal adjustments, the project aims to deliver a robust platform for modern traffic management in growing cities.
+                </p>
             </div>
         </div>
-
+        <!-- Outcome -->
+        <div class="mt-12" id="outcome">
+            <div class="section">
+                <h2 class="text-3xl font-bold text-center mb-4">OUTCOME</h2>
+                <p>
+                    The outcome of the "Smart Traffic Control and Violation Detection System" is to provide a comprehensive solution that addresses urban traffic congestion, enhances road safety, and prioritizes emergency vehicles for quicker response times. The system leverages advanced technologies to analyze real-time traffic conditions, optimize traffic flow, and enhance compliance with traffic regulations.
+                </p>
+            </div>
+        </div>
         <!-- Team -->
-        <div class="row scope-section mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Team</h2>
-                        <div class="d-flex justify-content-center">
-                            <div class="text-center mx-3">
-                                <img alt="A person with a beard smiling in an office setting" class="w-64 h-64 object-cover rounded-circle mx-auto mb-4" height="300" src="https://storage.googleapis.com/a1aa/image/5zCGcdv6P5ZTP9meJUbCjr1IFYt1sQwBZMMNrIY4aEMuoj6JA.jpg" width="300"/>
-                                <h2 class="text-xl font-semibold">
-                                    John Smith
-                                </h2>
-                                <p class="text-gray-500">
-                                    Position
-                                </p>
-                                <p class="text-gray-700 mt-2">
-                                    Separated they live in Bookmarksgrove right at the coast of the Semantics.
-                                </p>
-                            </div>
-                            <div class="text-center mx-3">
-                                <img alt="A person with glasses smiling in front of a gray background" class="w-64 h-64 object-cover rounded-circle mx-auto mb-4" height="300" src="https://storage.googleapis.com/a1aa/image/bS3rTgQBwwJhNxTZJ6YzagFH1OjXXneYfH5CWK8JkcxYRH1TA.jpg" width="300"/>
-                                <h2 class="text-xl font-semibold">
-                                    John Smith
-                                </h2>
-                                <p class="text-gray-500">
-                                    Position
-                                </p>
-                                <p class="text-gray-700 mt-2">
-                                    One morning, when Gregor Samsa woke from troubled dreams.
-                                </p>
-                            </div>
-                            <div class="text-center mx-3">
-                                <img alt="A person with curly hair smiling in front of a dark background" class="w-64 h-64 object-cover rounded-circle mx-auto mb-4" height="300" src="https://storage.googleapis.com/a1aa/image/uSQsjZHAOTrGHtjzPgOtKWRHb4QdDwfazzXEQ8GJBdAtoj6JA.jpg" width="300"/>
-                                <h2 class="text-xl font-semibold">
-                                    John Smith
-                                </h2>
-                                <p class="text-gray-500">
-                                    Position
-                                </p>
-                                <p class="text-gray-700 mt-2">
-                                    A small river named Duden flows by their place and supplies it.
-                                </p>
-                            </div>
-                            <div class="text-center mx-3">
-                                <img alt="A person with a friendly smile, wearing a casual shirt" class="w-64 h-64 object-cover rounded-circle mx-auto mb-4" height="300" src="https://storage.googleapis.com/a1aa/image/4pzIofEkXMRvOSHgDUNwPwUGFSPOKMY39BUEL360euTXTH1TA.jpg" width="300"/>
-                                <h2 class="text-xl font-semibold">
-                                    John Smith
-                                </h2>
-                                <p class="text-gray-500">
-                                    Position
-                                </p>
-                                <p class="text-gray-700 mt-2">
-                                    A small river named Duden flows by their place and supplies it.
-                                </p>
-                            </div>
-                        </div>
+        <div class="mt-12" id="team">
+            <div class="bg-white shadow-md rounded-lg p-6 card">
+                <h2 class="text-3xl font-bold text-center mb-4">TEAM</h2>
+                <!-- Team Guide -->
+                <div class="text-center team-member mb-12">
+                    <img alt="A person with a friendly smile, wearing a suit and tie" class="w-64 h-64 object-cover rounded-full mx-auto mb-4" height="300" src="static\Img\lokeshsir.jpg" width="300"/>
+                    <br/><h2 class="text-xl font-semibold">DR. LOKESH M R</h2>
+                    <p class="text-gray-500">TEAM GUIDE</p>
+                    <p class="text-gray-700 mt-2">PROFESSOR</p>
+                    <p class="text-gray-700">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</p>
+                </div>
+                <h2 class="text-2xl font-bold text-center mb-4">Team Members</h2>
+                <!-- Team Members -->
+                <div class="flex justify-center space-x-6 overflow-x-auto">
+                    <div class="text-center team-member mb-12">
+                        <img alt="A person with a beard smiling in an office setting" class="w-64 h-64 object-cover rounded-full mx-auto mb-4" height="300" src="static\Img\devesh.jpg" width="300"/>
+                        <br/><h2 class="text-xl font-semibold">DEVESH</h2>
+                        <p class="text-gray-500">4JK21IS012</p>
+                        <p class="text-gray-700 mt-2">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</p>
+                    </div>
+                    <div class="text-center team-member mb-12">
+                        <img alt="A person with glasses smiling in front of a gray background" class="w-64 h-64 object-cover rounded-full mx-auto mb-4" height="300" src="static\Img\jyothi.png" width="300"/>
+                        <br/><h2 class="text-xl font-semibold">JYOTHI</h2>
+                        <p class="text-gray-500">4JK21IS021</p>
+                        <p class="text-gray-700 mt-2">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</p>
+                    </div>
+                    <div class="text-center team-member mb-12">
+                        <img alt="A person with curly hair smiling in front of a dark background" class="w-64 h-64 object-cover rounded-full mx-auto mb-4" height="300" src="static\Img\kanvika.jpg" width="300"/>
+                        <br/><h2 class="text-xl font-semibold">KANVIKA R</h2>
+                        <p class="text-gray-500">4JK21IS023</p>
+                        <p class="text-gray-700 mt-2">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</p>
+                    </div>
+                    <div class="text-center team-member mb-12">
+                        <img alt="A person with a friendly smile, wearing a casual shirt" class="w-64 h-64 object-cover rounded-full mx-auto mb-4" height="300" src="static\Img\nidhi.png" width="300"/>
+                        <br/><h2 class="text-xl font-semibold">NIDHI J M</h2>
+                        <p class="text-gray-500">4JK21IS031</p>
+                        <p class="text-gray-700 mt-2">DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row feature-boxes mt-5">
-            <div class="col-md-4 feature-box">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-traffic-light mb-3"></i>
-                        <h3 class="card-title">Traffic Monitoring</h3>
-                        <p class="card-text">Real-time tracking and analysis of traffic flow across multiple intersections.</p>
+        <!-- Features -->
+        <div class="mt-12" id="project">
+            <div class="flex flex-wrap -mx-4">
+                <div class="w-full md:w-1/3 px-4 mb-6">
+                    <div class="bg-white shadow-md rounded-lg p-6 text-center card">
+                        <i class="fas fa-traffic-light text-4xl mb-3 text-blue-600"></i>
+                        <h3 class="text-2xl font-bold mb-2">Traffic Monitoring</h3>
+                        <p class="text-gray-700">Real-time tracking and analysis of traffic flow across multiple intersections.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4 feature-box">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-camera mb-3"></i>
-                        <h3 class="card-title">Violation Detection</h3>
-                        <p class="card-text">Advanced AI-powered system for automatic traffic rule violation identification.</p>
+                <div class="w-full md:w-1/3 px-4 mb-6">
+                    <div class="bg-white shadow-md rounded-lg p-6 text-center card">
+                        <i class="fas fa-camera text-4xl mb-3 text-blue-600"></i>
+                        <h3 class="text-2xl font-bold mb-2">Violation Detection</h3>
+                        <p class="text-gray-700">Advanced AI-powered system for automatic traffic rule violation identification.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4 feature-box">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-chart-line mb-3"></i>
-                        <h3 class="card-title">Analytics Dashboard</h3>
-                        <p class="card-text">Comprehensive reporting and insights for traffic management authorities.</p>
+                <div class="w-full md:w-1/3 px-4 mb-6">
+                    <div class="bg-white shadow-md rounded-lg p-6 text-center card">
+                        <i class="fas fa-chart-line text-4xl mb-3 text-blue-600"></i>
+                        <h3 class="text-2xl font-bold mb-2">Analytics Dashboard</h3>
+                        <p class="text-gray-700">Comprehensive reporting and insights for traffic management authorities.</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row quick-stats mt-5">
-            <div class="col-12 text-center">
-                <h2 class="mb-4">Today's Traffic Snapshot</h2>
-                <div class="row justify-content-center">
-                    <div class="col-md-3 stat-box">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body">
-                                <h4 class="card-title">Total Violations</h4>
-                                <p class="card-text display-4">245</p>
-                            </div>
-                        </div>
+        <!-- Quick Stats -->
+        <div class="mt-12 text-center">
+            <h2 class="text-3xl font-bold mb-4">Today's Traffic Snapshot</h2>
+            <div class="flex flex-wrap justify-center">
+                <div class="w-full md:w-1/3 px-4 mb-6">
+                    <div class="bg-blue-600 text-white shadow-md rounded-lg p-6 card">
+                        <h4 class="text-2xl font-bold mb-2">Total Violations</h4>
+                        <p class="text-4xl">245</p>
                     </div>
-                    <div class="col-md-3 stat-box">
-                        <div class="card bg-success text-white">
-                            <div class="card-body">
-                                <h4 class="card-title">Traffic Volume</h4>
-                                <p class="card-text display-4">1,234</p>
-                            </div>
-                        </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-6">
+                    <div class="bg-green-600 text-white shadow-md rounded-lg p-6 card">
+                        <h4 class="text-2xl font-bold mb-2">Traffic Volume</h4>
+                        <p class="text-4xl">1,234</p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-4">
-        <div class="container">
-            <p class="mb-0">&copy; 2024 Smart Traffic Management System</p>
+    <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+        <div class="container mx-auto">
+            <p class="mb-0">© 2024 Smart Traffic Management System</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-content').classList.toggle('hidden');
+        });
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        // Highlight the active section in the navigation
+        const sections = document.querySelectorAll('main > div');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
